@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import List from "../components/List/List";
 import Form from "../components/Form/Form";
+import { addTil } from "../redux/modules/tils";
 
 function Home() {
   const [inputs, setInputs] = useState({
@@ -12,20 +14,12 @@ function Home() {
 
   const { title, content, clock } = inputs;
 
-  const [tilList, setTIlList] = useState([
-    {
-      id: 1,
-      title: "React",
-      content: "리액트 실습",
-      clock: "시간",
-    },
-    {
-      id: 2,
-      title: "React2",
-      content: "리액트 실습2",
-      clock: "시간",
-    },
-  ]);
+  // useSelector
+  const { tils } = useSelector((state) => state.til_list);
+  console.log("tils는", tils);
+
+  // dispatch
+  const dispatch = useDispatch();
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -37,13 +31,12 @@ function Home() {
   };
 
   const onClickHandler = () => {
-    setTIlList([
-      ...tilList,
-      { id: tilList.length + 1, title: title, content: content, clock: clock },
-    ]);
-
-    console.log("등록이 완료되었습니다.");
-
+    // 값이 없을 경우 제어시키기
+    if (title === "" || content === "" || clock === "") {
+      alert("내용을 입력하세요");
+    } else {
+      dispatch(addTil(title, content, clock));
+    }
     // input 초기화
     setInputs({
       title: "",
@@ -55,14 +48,14 @@ function Home() {
   return (
     <>
       <Form
-        tilList={tilList}
+        tilList={tils}
         onChange={onChangeHandler}
         onClick={onClickHandler}
       />
       <div>
         <h2>TIL</h2>
         <div>
-          {tilList.map((til) => (
+          {tils.map((til) => (
             <List key={til.id} tilList={til} />
           ))}
         </div>
