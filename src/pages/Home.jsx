@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import List from "../components/List/List";
-import Form from "../components/Form/Form";
+import List from "../components/list/List";
+import Form from "../components/form/Form";
 import { addTil, deleteTil } from "../redux/modules/tils";
 
 function Home() {
