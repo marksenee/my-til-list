@@ -16,7 +16,6 @@ function Home() {
 
   // useSelector
   const { tils } = useSelector((state) => state.til_list);
-  console.log("tils는", tils);
 
   // dispatch
   const dispatch = useDispatch();
