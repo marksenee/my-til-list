@@ -1,9 +1,13 @@
 import React from "react";
 
-function Detail() {
+function Detail({ tils }) {
+  const { id, title, content, clock } = tils;
   return (
     <>
-      <div>Detail 페이지 입니다.</div>
+      <div>ID : {id}</div>
+      <div>{title}</div>
+      <div>{content}</div>
+      <div>{clock}</div>
     </>
   );
 }
