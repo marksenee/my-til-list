@@ -2,6 +2,7 @@ import React from "react";
 
 function Form({ tilList, onChange, onClick }) {
   const { title, content, clock } = tilList;
+  console.log("Ttt", title);
 
   return (
     <>
