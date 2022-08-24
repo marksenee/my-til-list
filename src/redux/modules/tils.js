@@ -3,6 +3,7 @@ let nextId = 3;
 
 /* Action Value */
 const ADD_TIL = "ADD_TIL";
+const DELETE_TIL = "DELETE_TIL";
 
 /* Action Creator */
 export const addTil = (title, content, clock) => {
@@ -14,6 +15,13 @@ export const addTil = (title, content, clock) => {
       content: content,
       clock: clock,
     },
+  };
+};
+
+export const deleteTil = (id) => {
+  return {
+    type: DELETE_TIL,
+    id,
   };
 };
 
@@ -42,6 +50,11 @@ const til_list = (state = initialState, action) => {
       return {
         ...state,
         tils: state.tils.concat(action.til),
+      };
+    case DELETE_TIL:
+      return {
+        ...state,
+        tils: state.tils.filter((til) => til.id !== action.id),
       };
     default:
       return state;

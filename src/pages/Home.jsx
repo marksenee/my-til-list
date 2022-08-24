@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import List from "../components/List/List";
 import Form from "../components/Form/Form";
-import { addTil } from "../redux/modules/tils";
+import { addTil, deleteTil } from "../redux/modules/tils";
 
 function Home() {
   const [inputs, setInputs] = useState({
@@ -45,6 +45,11 @@ function Home() {
     });
   };
 
+  // 삭제
+  const onDeleteTil = (id) => {
+    dispatch(deleteTil(id));
+  };
+
   return (
     <>
       <Form
@@ -56,7 +61,7 @@ function Home() {
         <h2>TIL</h2>
         <div>
           {tils.map((til) => (
-            <List key={til.id} tilList={til} />
+            <List key={til.id} tilList={til} onDelete={onDeleteTil} />
           ))}
         </div>
       </div>
